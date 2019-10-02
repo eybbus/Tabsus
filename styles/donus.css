@@ -1,0 +1,148 @@
+html {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  background-color: #b6bcca;
+}
+
+body * {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* To remove visited color */
+a,
+a:visited,
+a:hover,
+a:active {
+  color: inherit;
+}
+
+.container {
+  width: 100%;
+  flex: 1 1 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#todo-container {
+  flex: 1 1 400px;
+  background-color: aquamarine;
+  height: 400px;
+  margin: 20px;
+}
+
+#sites-container {
+  flex: 0 2 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-site-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 100px;
+  max-height: 100px;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  margin: 5px;
+  transition: all;
+  transition-duration: 0.2s;
+}
+
+.top-site-container:hover {
+  margin-right: 20px;
+}
+
+.top-site {
+  flex: 1 0 75px;
+  width: 75px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+#settings {
+  top: 5px;
+  right: 5px;
+  position: absolute;
+}
+
+#sidebar {
+  position: fixed;
+  z-index: 1;
+  width: 0px;
+  height: 100%;
+  right: 0px;
+  top: 0px;
+  background-color: #00b3b3;
+  overflow-x: hidden;
+  transition: 500ms;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#sidebar .closebtn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 36px;
+}
+
+.side-header {
+  height: 60px;
+  width: 100%;
+}
+
+.side-header > h2 {
+  text-align: center;
+  margin: 5px;
+}
+
+#settings-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+
+.input-color-container {
+  position: relative;
+  overflow: hidden;
+  margin: 5px 10px;
+  width: 40px;
+  height: 40px;
+  border: solid 2px #ddd;
+  border-radius: 40px;
+}
+
+.input-color {
+  position: absolute;
+  right: -15px;
+  top: -15px;
+  width: 75px;
+  height: 75px;
+  border: none;
+}

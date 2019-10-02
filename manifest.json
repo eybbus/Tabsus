@@ -1,0 +1,10 @@
+{
+  "manifest_version": 2,
+  "name": "Donus",
+  "version": "0.1",
+  "description": "new tab replaced with reminders and what you should be doing",
+  "chrome_url_overrides": {
+    "newtab": "donus.html"
+  },
+  "permissions": ["topSites"]
+}
