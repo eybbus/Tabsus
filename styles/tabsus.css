@@ -46,9 +46,11 @@ a:active {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 90vh;
 }
 
 .top-site-container {
+  flex: 1 1 100px;
   display: flex;
   flex-direction: column;
   max-width: 100px;
@@ -57,13 +59,18 @@ a:active {
   overflow: hidden;
   text-overflow: ellipsis;
   text-decoration: none;
-  margin: 5px;
+  margin-top: 15px;
   transition: all;
   transition-duration: 0.2s;
 }
 
 .top-site-container:hover {
   margin-right: 20px;
+  transform: scale(1.2);
+}
+
+.top-site-container:hover > span {
+  text-decoration: underline;
 }
 
 .top-site {
