@@ -6,12 +6,14 @@ window.onload = function() {
   let morningBrush = false;
   let eveningBrush = false;
 
+  // setting up the style depending on user settings.
   function setup() {
     body.style.backgroundColor = localStorage.backgroundColor;
     setTitle();
     setupTopSites();
   }
 
+  // Loads in top 10 sites.
   function setupTopSites() {
     browser.topSites.get({ limit: 10, includeFavicon: true }).then(sites => {
       var div = document.getElementById('sites-container');
@@ -21,9 +23,8 @@ window.onload = function() {
         return;
       }
 
-      // inserting the topsites dynamicly
+      // inserting the topsites dynamically
       for (let site of sites) {
-        console.log(site);
         let a = document.createElement('a');
         a.className = 'top-site-container';
         a.href = site.url;
@@ -57,9 +58,11 @@ window.onload = function() {
     let hour = time.getHours();
 
     if (!morningBrush && hour >= 6 && hour <= 12) {
+      // TODO: send notification
       console.log('Good morning, have you brushed your teeth?');
     }
     if (!eveningBrush && hour >= 22) {
+      // TODO: send notification
       console.log("It's almost bedtime, have you brushed your teeth?");
     }
   }
@@ -67,6 +70,7 @@ window.onload = function() {
   setup();
   timeChecks();
 
+  // connecting buttons to functions;
   document
     .getElementById('settings')
     .addEventListener('click', setSideBarWidth.bind(null, '400px'));
