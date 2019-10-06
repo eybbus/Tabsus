@@ -3,8 +3,8 @@ window.onload = function() {
 
   let body = document.getElementsByTagName('body')[0];
 
-  let morningBrush = false;
-  let eveningBrush = false;
+  let morningBrush = tryLocalStorageBool('morningBrush');
+  let eveningBrush = tryLocalStorageBool('eveningBrush');
 
   // setting up the style depending on user settings.
   function setup() {
@@ -54,21 +54,58 @@ window.onload = function() {
     });
   }
 
-  function timeChecks() {
+  function brushCheck() {
     let hour = time.getHours();
-
     if (!morningBrush && hour >= 6 && hour <= 12) {
-      // TODO: send notification
-      console.log('Good morning, have you brushed your teeth?');
+      document.getElementsByClassName('popup')[0].classList.add('is-visible');
+      setPopup(
+        'Good morning, have you brushed your teeth?',
+        function() {
+          localStorage.setItem('morningBrush', 'true');
+          localStorage.setItem('eveningBrush', 'false');
+          morningBrush = true;
+          popupClose();
+        },
+        function() {
+          localStorage.setItem('morningBrush', 'false');
+          morningBrush = false;
+          popupClose();
+        }
+      );
+      eveningBrush = false;
+      morningBrush = true;
     }
-    if (!eveningBrush && hour >= 22) {
-      // TODO: send notification
-      console.log("It's almost bedtime, have you brushed your teeth?");
+    if (!eveningBrush && (hour >= 22 || (hour >= 0 && hour <= 3))) {
+      document.getElementsByClassName('popup')[0].classList.add('is-visible');
+      setPopup(
+        "It's almost bedtime, have you brushed your teeth?",
+        function() {
+          localStorage.setItem('eveningBrush', 'true');
+          localStorage.setItem('morningBrush', 'false');
+          eveningBrush = true;
+          popupClose();
+        },
+        function() {
+          localStorage.setItem('eveningBrush', 'false');
+          eveningBrush = false;
+          popupClose();
+        }
+      );
     }
   }
 
+  function popupClose() {
+    document.getElementsByClassName('popup')[0].classList.remove('is-visible');
+  }
+
+  function setPopup(text, confirmFunc, denyFunc) {
+    document.getElementById('btn-deny').onclick = denyFunc;
+    document.getElementById('btn-confirm').onclick = confirmFunc;
+    document.getElementsByClassName('popup-content')[0].innerHTML = text;
+  }
+
   setup();
-  timeChecks();
+  brushCheck();
 
   // connecting buttons to functions;
   document
@@ -78,9 +115,9 @@ window.onload = function() {
     .getElementById('closebtn')
     .addEventListener('click', setSideBarWidth.bind(null, '0px'));
 
-  function watchColorPicker(event) {
-    document.querySelectorAll('p').forEach(function(p) {
-      p.style.color = event.target.value;
-    });
-  }
+  document.getElementById('popup-close').addEventListener('click', popupClose);
 };
+
+function tryLocalStorageBool(key) {
+  return localStorage.getItem(key) === 'true';
+}
