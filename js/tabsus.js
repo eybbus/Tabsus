@@ -23,23 +23,17 @@ window.onload = function() {
         return;
       }
 
-      // inserting the topsites dynamically
-      for (let site of sites) {
-        let a = document.createElement('a');
-        a.className = 'top-site-container';
-        a.href = site.url;
-        let box = document.createElement('div');
-        box.style.backgroundImage = site.favicon;
-        box.style.backgroundImage = `url(${site.favicon})`;
-        box.className = 'top-site';
-        let span = document.createElement('span');
-
-        span.innerText = site.title.split(':')[0].split('-')[0];
-        a.appendChild(box);
-        a.append(span);
-        div.appendChild(a);
-      }
+      document.querySelector('#sites-container').innerHTML = sites
+        .map(el => topSite(el))
+        .join('');
     });
+  }
+
+  function topSite(data) {
+    return `<a href="${data.url}" class="top-site-container">
+				<div class="top-site" style="background-image: url(${data.favicon})"></div>
+				<span>${data.title}</span>
+			</a>`;
   }
 
   function setSideBarWidth(width) {
@@ -98,10 +92,10 @@ window.onload = function() {
     document.getElementsByClassName('popup')[0].classList.remove('is-visible');
   }
 
-  function setPopup(text, confirmFunc, denyFunc) {
+  function setPopup(displayText, confirmFunc, denyFunc) {
     document.getElementById('btn-deny').onclick = denyFunc;
     document.getElementById('btn-confirm').onclick = confirmFunc;
-    document.getElementsByClassName('popup-content')[0].innerHTML = text;
+    document.getElementsByClassName('popup-content')[0].innerHTML = displayText;
   }
 
   setup();
@@ -110,12 +104,13 @@ window.onload = function() {
   // connecting buttons to functions;
   document
     .getElementById('settings')
-    .addEventListener('click', setSideBarWidth.bind(null, '400px'));
+    .addEventListener('click', evt => setSideBarWidth('400px'));
   document
     .getElementById('closebtn')
-    .addEventListener('click', setSideBarWidth.bind(null, '0px'));
-
-  document.getElementById('popup-close').addEventListener('click', popupClose);
+    .addEventListener('click', evt => setSideBarWidth('0px'));
+  document
+    .getElementById('popup-close')
+    .addEventListener('click', evt => popupClose());
 };
 
 function tryLocalStorageBool(key) {
