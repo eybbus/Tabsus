@@ -1,3 +1,11 @@
+:root {
+  --main-color-1: #264653;
+  --main-color-2: #2a9d8f;
+  --main-color-3: #e9c46a;
+  --main-color-4: #f4a261;
+  --main-color-5: #e76f51;
+}
+
 html {
   height: 100%;
 }
@@ -9,11 +17,12 @@ body {
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  background-color: #b6bcca;
+  background-color: var(--main-color-1);
 }
 
 body * {
   font-family: 'Roboto', sans-serif;
+  color: var(--main-color-5);
 }
 
 /* To remove visited color */
@@ -35,7 +44,7 @@ a:active {
 
 #todo-container {
   flex: 1 1 400px;
-  background-color: aquamarine;
+  background-color: var(--main-color-3);
   height: 400px;
   margin: 20px;
 }
@@ -98,7 +107,7 @@ a:active {
   height: 100%;
   right: 0px;
   top: 0px;
-  background-color: #00b3b3;
+  background-color: var(--main-color-1);
   overflow-x: hidden;
   transition: 500ms;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
