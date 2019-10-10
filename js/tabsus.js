@@ -83,50 +83,55 @@ function popupClose() {
   document.getElementsByClassName('popup')[0].classList.remove('is-visible');
 }
 
+
 function setPopup(displayText, confirmFunc, denyFunc) {
+  document.querySelector('.popup').classList.add('is-visible');
   document.getElementById('btn-deny').onclick = denyFunc;
   document.getElementById('btn-confirm').onclick = confirmFunc;
-  document.getElementsByClassName('popup-content')[0].innerHTML = displayText;
+  document.querySelector('.popup-content').innerHTML = displayText;
 }
 
-function brushCheck() {
+function isMorning() {
   const time = new Date();
+  return (time.hour >= 6 && time.hour <= 12);
+}
+
+function isEvening() {
+  const time = new Date();
+  return (time.hour >= 22 || time.hour <= 3);
+}
+
+/**
+ * Checks if user should go and brush their teeth and sends popup for verification.
+ */
+function brushCheck() {
   let morningBrush = tryLocalStorageBool('morningBrush');
   let eveningBrush = tryLocalStorageBool('eveningBrush');
 
-  let hour = time.getHours();
-  if (!morningBrush && hour >= 6 && hour <= 12) {
-    document.getElementsByClassName('popup')[0].classList.add('is-visible');
+  if (!morningBrush && isMorning()) {
     setPopup(
       'Good morning, have you brushed your teeth?',
       () => {
         localStorage.setItem('morningBrush', 'true');
         localStorage.setItem('eveningBrush', 'false');
-        morningBrush = true;
         popupClose();
       },
       () => {
         localStorage.setItem('morningBrush', 'false');
-        morningBrush = false;
         popupClose();
       }
     );
-    eveningBrush = false;
-    morningBrush = true;
   }
-  if (!eveningBrush && (hour >= 22 || (hour >= 0 && hour <= 3))) {
-    document.getElementsByClassName('popup')[0].classList.add('is-visible');
+  if (!eveningBrush && isEvening()) {
     setPopup(
       "It's almost bedtime, have you brushed your teeth?",
       () => {
         localStorage.setItem('eveningBrush', 'true');
         localStorage.setItem('morningBrush', 'false');
-        eveningBrush = true;
         popupClose();
       },
       () => {
         localStorage.setItem('eveningBrush', 'false');
-        eveningBrush = false;
         popupClose();
       }
     );
