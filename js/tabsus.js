@@ -80,15 +80,21 @@ function tryLocalStorageBool(key) {
 }
 
 function popupClose() {
-  document.getElementsByClassName('popup')[0].classList.remove('is-visible');
+  document.querySelector('.popup').classList.remove('is-visible');
 }
 
-
-function setPopup(displayText, confirmFunc, denyFunc) {
-  document.querySelector('.popup').classList.add('is-visible');
-  document.getElementById('btn-deny').onclick = denyFunc;
-  document.getElementById('btn-confirm').onclick = confirmFunc;
+/**
+ * Displays a popup and sets the text and what happens when confirm 
+ * and deny buttons are pressed;
+ * @param {String} displayText 
+ * @param {Function} confirmBtn 
+ * @param {Function} denyBtn 
+ */
+function setPopup(displayText, confirmBtn, denyBtn) {
+  document.querySelector('.popup').classList.add('is-visible')
   document.querySelector('.popup-content').innerHTML = displayText;
+  document.getElementById('btn-confirm').onclick = confirmBtn;
+  document.getElementById('btn-deny').onclick = denyBtn;
 }
 
 function isMorning() {
