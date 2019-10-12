@@ -84,14 +84,14 @@ function popupClose() {
 }
 
 /**
- * Displays a popup and sets the text and what happens when confirm 
+ * Displays a popup and sets the text and what happens when confirm
  * and deny buttons are pressed;
- * @param {String} displayText 
- * @param {Function} confirmBtn 
- * @param {Function} denyBtn 
+ * @param {String} displayText
+ * @param {Function} confirmBtn
+ * @param {Function} denyBtn
  */
 function setPopup(displayText, confirmBtn, denyBtn) {
-  document.querySelector('.popup').classList.add('is-visible')
+  document.querySelector('.popup').classList.add('is-visible');
   document.querySelector('.popup-content').innerHTML = displayText;
   document.getElementById('btn-confirm').onclick = confirmBtn;
   document.getElementById('btn-deny').onclick = denyBtn;
@@ -99,12 +99,12 @@ function setPopup(displayText, confirmBtn, denyBtn) {
 
 function isMorning() {
   const time = new Date();
-  return (time.hour >= 6 && time.hour <= 12);
+  return time.hour >= 6 && time.hour <= 12;
 }
 
 function isEvening() {
   const time = new Date();
-  return (time.hour >= 22 || time.hour <= 3);
+  return time.hour >= 22 || time.hour <= 3;
 }
 
 /**
@@ -115,11 +115,11 @@ function brushCheck() {
   let eveningBrush = tryLocalStorageBool('eveningBrush');
 
   if (!morningBrush && isMorning()) {
+    localStorage.setItem('eveningBrush', 'false');
     setPopup(
       'Good morning, have you brushed your teeth?',
       () => {
         localStorage.setItem('morningBrush', 'true');
-        localStorage.setItem('eveningBrush', 'false');
         popupClose();
       },
       () => {
@@ -129,11 +129,11 @@ function brushCheck() {
     );
   }
   if (!eveningBrush && isEvening()) {
+    localStorage.setItem('morningBrush', 'false');
     setPopup(
       "It's almost bedtime, have you brushed your teeth?",
       () => {
         localStorage.setItem('eveningBrush', 'true');
-        localStorage.setItem('morningBrush', 'false');
         popupClose();
       },
       () => {
