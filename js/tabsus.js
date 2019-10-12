@@ -44,7 +44,7 @@ function initTitle() {
  * Initializes the sites container with top sites.
  */
 function initTopSites() {
-  browser.topSites.get({ limit: 10, includeFavicon: true }).then(sites => {
+  browser.topSites.get({ limit: 20, includeFavicon: true }).then(sites => {
     var sitesContainer = document.querySelector('#sites-container');
 
     if (!sites.length) {
@@ -61,9 +61,11 @@ function initTopSites() {
  * @param {object} data
  */
 function topSite(data) {
-  return `<a href="${data.url}" class="top-site-container">
-			<div class="top-site" style="background-image: url(${data.favicon})"></div>
-			<span>${data.title}</span>
+  console.log(data.url);
+  
+  return `<a href="${data.url}" class="top-site-card">
+			<div class="top-site" style="background-image: url(${data.favicon != null ? data.favicon : '../icons/unknown.png'})"></div>
+			<span>${data.title ? data.title : data.url}</span>
 		</a>`;
 }
 
