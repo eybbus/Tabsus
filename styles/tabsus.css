@@ -33,52 +33,53 @@ a:active {
   color: inherit;
 }
 
-.container {
+main {
   width: 100%;
-  flex: 1 1 100%;
+  flex: 1 0 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
+#sites-container {
+  width: 90%;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-start;
-}
-
-#todo-container {
-  flex: 1 1 400px;
-  background-color: var(--main-color-3);
-  height: 400px;
-  margin: 20px;
-}
-
-#sites-container {
-  flex: 0 2 150px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 90vh;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  background-color: var(--main-color-2);
 }
 
-.top-site-container {
-  flex: 1 1 100px;
+.top-site-card {
+  flex: 1 1 125px;
+  max-width: 125px;
+  max-height: 100px;
+  margin-top: 15px;
   display: flex;
   flex-direction: column;
-  max-width: 100px;
-  max-height: 100px;
   align-items: center;
   overflow: hidden;
   text-overflow: ellipsis;
   text-decoration: none;
-  margin-top: 15px;
   transition: all;
   transition-duration: 0.2s;
+  text-align: center;
 }
 
-.top-site-container:hover {
-  margin-right: 20px;
+.top-site-card > span {
+  color: var(--main-color-1);
+}
+
+.top-site-card:hover {
+  margin-top: 10px;
   transform: scale(1.2);
 }
 
-.top-site-container:hover > span {
+.top-site-card:hover > span {
   text-decoration: underline;
 }
 
