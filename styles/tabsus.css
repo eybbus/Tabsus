@@ -1,0 +1,267 @@
+:root {
+  --main-color-1: #264653;
+  --main-color-2: #2a9d8f;
+  --main-color-3: #e9c46a;
+  --main-color-4: #f4a261;
+  --main-color-5: #e76f51;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-color-1);
+}
+
+body * {
+  font-family: 'Roboto', sans-serif;
+  color: var(--main-color-5);
+}
+
+/* To remove visited color */
+a,
+a:visited,
+a:hover,
+a:active {
+  color: inherit;
+}
+
+main {
+  width: 100%;
+  flex: 1 0 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#sites-container {
+  width: 90%;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  background-color: var(--main-color-2);
+}
+
+.top-site-card {
+  flex: 1 1 125px;
+  max-width: 125px;
+  max-height: 100px;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+  transition: all;
+  transition-duration: 0.2s;
+  text-align: center;
+}
+
+.top-site-card > span {
+  color: var(--main-color-1);
+}
+
+.top-site-card:hover {
+  transform: scale(1.15);
+}
+
+.top-site-card:hover > span {
+  text-decoration: underline;
+}
+
+.top-site {
+  flex: 1 0 75px;
+  width: 75px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+#settings {
+  top: 5px;
+  right: 5px;
+  position: absolute;
+}
+
+#sidebar {
+  position: fixed;
+  z-index: 1;
+  width: 0px;
+  height: 100%;
+  right: 0px;
+  top: 0px;
+  background-color: var(--main-color-1);
+  overflow-x: hidden;
+  transition: 500ms;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#sidebar .closebtn {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 36px;
+}
+
+.side-header {
+  height: 60px;
+  width: 100%;
+}
+
+.side-header > h2 {
+  text-align: center;
+  margin: 5px;
+}
+
+#settings-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+}
+
+.input-color-container {
+  position: relative;
+  overflow: hidden;
+  margin: 5px 10px;
+  width: 40px;
+  height: 40px;
+  border: solid 2px #ddd;
+  border-radius: 40px;
+}
+
+.input-color {
+  position: absolute;
+  right: -15px;
+  top: -15px;
+  width: 75px;
+  height: 75px;
+  border: none;
+}
+
+/* --- Popup styling --- */
+
+.popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #808080c4;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.popup-container {
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  margin: 4em auto;
+  background: #eeeeee;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s 0s, visibility 0s 0s;
+}
+
+.popup-content {
+  height: 100px;
+  line-height: 100px;
+}
+
+.popup-btn-container {
+  display: flex;
+  height: 60px;
+}
+
+.popup-btn {
+  display: block;
+  line-height: 60px;
+  text-decoration: none;
+}
+
+.popup-btn:first-child {
+  border-radius: 0 0 0 5px;
+  width: 50%;
+  height: 100%;
+  background-color: lightseagreen;
+  color: white;
+}
+
+.popup-btn:last-child {
+  border-radius: 0 0 5px 0;
+  width: 50%;
+  height: 100%;
+}
+
+.popup-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+}
+
+.popup-close::before,
+.popup-close::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  width: 14px;
+  height: 3px;
+  background-color: #8f9cb5;
+}
+.popup-close:before {
+  transform: rotate(45deg);
+  left: 8px;
+}
+
+.popup-close:after {
+  transform: rotate(-45deg);
+  right: 8px;
+}
+
+.popup-close:hover:after,
+.popup-close:hover:before {
+  background-color: #393f49;
+}
+
+/* ---------- */
+
+.img-replace {
+  /* replace text with an image */
+  display: inline-block;
+  overflow: hidden;
+  text-indent: 100%;
+  color: transparent;
+  white-space: nowrap;
+}

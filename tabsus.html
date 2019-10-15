@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link href="/styles/tabsus.css" rel="stylesheet" />
+    <link href="/styles/reset.css" rel="stylesheet" />
+    <script type="text/javascript" src="/js/tabsus.js"></script>
+    <title>New Tab</title>
+  </head>
+  <body>
+    <header>
+      <h1 id="title">New tab</h1>
+    </header>
+    <div class="btn" id="settings">
+      <i class="material-icons">menu</i>
+    </div>
+    <main class="container">
+      <div id="sites-container"></div>
+    </main>
+    <div id="sidebar">
+      <i class="material-icons btn closebtn" id="closebtn">close</i>
+      <header class="side-header">
+        <h2>Settings</h2>
+      </header>
+      <form id="settings-form" action="">
+        <div class="color-container">
+          <div class="input-color-container">
+            <input
+              type="color"
+              class="input-color"
+              id="color-picker"
+              value="#b6bcca"
+            />
+          </div>
+          <input type="text" name="" id="" value="b6bcca" />
+        </div>
+        <button type="submit">Save</button>
+      </form>
+    </div>
+    <div class="popup">
+      <div class="popup-container">
+        <p class="popup-content"></p>
+        <div class="popup-btn-container">
+          <a role="button" href="#" class="popup-btn" id="btn-confirm">yes</a>
+          <a role="button" href="#" class="popup-btn" id="btn-deny">no</a>
+        </div>
+        <a href="#" class="popup-close img-replace" id="popup-close">close</a>
+      </div>
+    </div>
+  </body>
+</html>
