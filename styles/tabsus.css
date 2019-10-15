@@ -42,9 +42,9 @@ main {
   align-items: center;
 }
 
-
 #sites-container {
   width: 90%;
+  padding: 5px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -75,8 +75,7 @@ main {
 }
 
 .top-site-card:hover {
-  margin-top: 10px;
-  transform: scale(1.2);
+  transform: scale(1.15);
 }
 
 .top-site-card:hover > span {
@@ -215,6 +214,7 @@ main {
   width: 50%;
   height: 100%;
   background-color: lightseagreen;
+  color: white;
 }
 
 .popup-btn:last-child {
