@@ -44,7 +44,7 @@ function initTitle() {
  * Initializes the sites container with top sites.
  */
 function initTopSites() {
-  browser.topSites.get({ limit: 20, includeFavicon: true }).then(sites => {
+  browser.topSites.get({ limit: 15, includeFavicon: true }).then(sites => {
     var sitesContainer = document.querySelector('#sites-container');
 
     if (!sites.length) {
@@ -62,9 +62,11 @@ function initTopSites() {
  */
 function topSite(data) {
   console.log(data.url);
-  
+
   return `<a href="${data.url}" class="top-site-card">
-			<div class="top-site" style="background-image: url(${data.favicon != null ? data.favicon : '../icons/unknown.png'})"></div>
+			<div class="top-site" style="background-image: url(${
+        data.favicon != null ? data.favicon : '../icons/unknown.png'
+      })"></div>
 			<span>${data.title ? data.title : data.url}</span>
 		</a>`;
 }
@@ -100,48 +102,82 @@ function setPopup(displayText, confirmBtn, denyBtn) {
 }
 
 function isMorning() {
-  const time = new Date();
-  return time.hour >= 6 && time.hour <= 12;
+  const date = new Date();
+  return date.getHours() >= 1 && date.getHours() <= 12;
 }
 
 function isEvening() {
-  const time = new Date();
-  return time.hour >= 22 || time.hour <= 3;
+  const date = new Date();
+  return date.getHours() >= 20;
 }
 
 /**
  * Checks if user should go and brush their teeth and sends popup for verification.
  */
 function brushCheck() {
-  let morningBrush = tryLocalStorageBool('morningBrush');
-  let eveningBrush = tryLocalStorageBool('eveningBrush');
+  let brush = getBrushState();
 
-  if (!morningBrush && isMorning()) {
-    localStorage.setItem('eveningBrush', 'false');
+  if (!brush.morningIsDone && isMorning()) {
     setPopup(
       'Good morning, have you brushed your teeth?',
       () => {
-        localStorage.setItem('morningBrush', 'true');
+        setBrushState(true, false);
         popupClose();
       },
       () => {
-        localStorage.setItem('morningBrush', 'false');
+        setBrushState(false, false);
         popupClose();
       }
     );
   }
-  if (!eveningBrush && isEvening()) {
-    localStorage.setItem('morningBrush', 'false');
+
+  if (!brush.eveningIsDone && isEvening()) {
     setPopup(
       "It's almost bedtime, have you brushed your teeth?",
       () => {
-        localStorage.setItem('eveningBrush', 'true');
+        setBrushState(false, true);
         popupClose();
       },
       () => {
-        localStorage.setItem('eveningBrush', 'false');
+        setBrushState(false, false);
         popupClose();
       }
     );
   }
+}
+
+/**
+ * Sets brushState to localstorage and returns the new brush state
+ * @param {boolean} morningIsDone
+ * @param {boolean} eveningIsDone
+ * @returns {object} newBrushState
+ */
+function setBrushState(morningIsDone, eveningIsDone) {
+  let newBrushState = {
+    date: new Date(),
+    morningIsDone: morningIsDone,
+    eveningIsDone: eveningIsDone
+  };
+
+  localStorage.setItem('brushState', JSON.stringify(newBrushState));
+
+  return newBrushState;
+}
+
+function getBrushState() {
+  let brush = localStorage.getItem('brushState');
+
+  try {
+    brush = JSON.parse(brush);
+    if (isNewBrushDay(brush.date)) {
+      brush = setBrushState(false, false);
+    }
+    return brush;
+  } catch (error) {
+    return setBrushState(false, false);
+  }
+}
+
+function isNewBrushDay(brushDate) {
+  return new Date(brushDate).getDay() !== new Date().getDay();
 }
